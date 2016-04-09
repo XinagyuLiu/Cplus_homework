@@ -1,0 +1,22 @@
+1. const int * p1 和 int * const p2的区别是什么？		
+
+2. 基于char * 设计一个字符串类MyString。要求具有如下功能：
+1）构造函数、析构函数、拷贝构造函数。
+2）可以获取指向char *字符串的指针。要求指针为const类型，不能通过该指针直接修改MyString内的字符串。
+	const char * GetBuffer(); //获取字符串buffer
+3）提供字符串长度函数。
+	int GetLength(); //获取字符串长度
+4）可以重新给该字符串赋值（重新设置字符串的内容），比如原来的值为"abc",可以重新设置为"cdef"。
+	void SetString(const char * str); //重新设置成一个新的字符串
+	void SetString(const MyString & str); //重新设置成一个新的字符串
+5）可以对字符串尾部追加新的字符串。比如字符串为"abc"，追加"def"后变成"abcdef"。
+	void Append(const char * str); //追加字符串
+	void Append(const MyString & str);  //追加字符串
+6）请编写测试程序，对MyString函数进行测试。
+7）请自行上机调试。
+
+	
+
+	
+
+	

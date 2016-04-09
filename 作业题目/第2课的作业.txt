@@ -1,0 +1,9 @@
+1. 解释public和private的作用，共有类型成员和私有类型成员有什么区别。
+2. 定义一个Person类，该类拥有两个属性int posX和int posY，表示一个Person对象的位置。
+    （1）提供一个init函数void init(int x = 0, int y = 0),用于给x和y赋初始值，x和y的缺省值为0。
+    （2）有一个void move(int offsetX, int offsetY)方法，用来改变Person对象位置。移动后的新位置为(posX + offsetX, posY + offsetY);
+    （3）int getX()和int getY()方法返回posX和posY的值。
+    （4）编写main函数，测试Person类。
+
+
+作业必须包含独立完成声明。

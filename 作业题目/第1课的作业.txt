@@ -1,0 +1,28 @@
+使用链表实现一个整数堆栈的相关函数.堆栈的数据结构如下：
+struct StackNode
+{
+ int Data;
+ struct StackNode *pNext;
+};
+
+struct Stack_T
+{
+ struct StackNode * head;
+ int size;
+};
+
+
+堆栈至少包括操作：
+1. Stack_T * CreateStack()创建一个空堆栈，返回指向栈顶的指针。
+2. void StackPush(Stack_T * pStack, int num) 把一个整数压入到堆栈的栈顶，输入参数为栈指针和需要压入栈的整数。返回值为空。
+3. int StackPop(Stack_T * pStack)返回把栈顶的整数，同时把栈顶的数从堆栈里弹出（移除）。输入参数为栈指针。返回值为被弹出栈的整数。
+4. int StackTop(Stack_T * pStack)返回值：栈顶的整数。输入参数为栈指针。
+5. int StackSize(Stack_T * pStack)返回值：当前堆栈的长度。输入参数为栈指针。
+*6. void FreeStack(Stack_T * pStack),清空Stack。
+
+其他要求：
+1. 尽量考虑代码的鲁棒性（健壮性），比如栈为空的时候，StackPop和StackTop如何处理。提示：可以抛出异常或者使用assert语句。
+2. 程序分成两个文件：Stack.h和Stack.c文件。在Stack.h文件里定义结构体，声明函数。在Stack.c文件里实现堆栈操作的各个函数。
+3. 作业里不需要包含main()函数。 请同学们自行编写测试用例来测试个人程序。
+
+

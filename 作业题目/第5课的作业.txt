@@ -1,0 +1,4 @@
+定义一个猫Cat类，拥有静态数据成员numOfCats,记录Cat对象的个体数目。静态成员函数getNumofCats(),读取numOfCats。
+另外，一只猫可以有自己的名字name（属性），可以发出叫声mew(方法,打印一行文字"miao miao")；
+
+编写程序测试这个类。
