@@ -32,13 +32,13 @@ CDraw1Doc::CDraw1Doc()
 	// TODO: add one-time construction code here
 
 }
-
 CDraw1Doc::~CDraw1Doc()
 {
 }
 
 BOOL CDraw1Doc::OnNewDocument()
 {
+	SetTitle("»­Í¼¹¤¾ß");
 	if (!CDocument::OnNewDocument())
 		return FALSE;
 

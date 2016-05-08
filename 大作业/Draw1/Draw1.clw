@@ -2,23 +2,26 @@
 
 [General Info]
 Version=1
-LastClass=CDraw1View
+LastClass=CDialog1
 LastTemplate=CDialog
 NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "Draw1.h"
 LastPage=0
 
-ClassCount=5
+ClassCount=6
 Class1=CDraw1App
 Class2=CDraw1Doc
 Class3=CDraw1View
 Class4=CMainFrame
 
-ResourceCount=3
-Resource1=IDR_DRAW
-Resource2=IDR_MAINFRAME
+ResourceCount=5
+Resource1=IDR_MAINFRAME
+Resource2=IDR_DRAW
 Class5=CAboutDlg
 Resource3=IDD_ABOUTBOX
+Resource4=IDD_DIALOGBAR (English (U.S.))
+Class6=CDialog1
+Resource5=IDD_DIALOG1
 
 [CLS:CDraw1App]
 Type=0
@@ -38,7 +41,7 @@ Type=0
 HeaderFile=Draw1View.h
 ImplementationFile=Draw1View.cpp
 Filter=C
-LastObject=ID_ELLIPSE
+LastObject=CDraw1View
 BaseClass=CView
 VirtualFilter=VWC
 
@@ -48,7 +51,7 @@ Type=0
 HeaderFile=MainFrm.h
 ImplementationFile=MainFrm.cpp
 Filter=T
-LastObject=CMainFrame
+LastObject=ID_SIN
 
 
 
@@ -86,18 +89,21 @@ Command12=ID_EDIT_COPY
 Command13=ID_EDIT_PASTE
 Command14=ID_VIEW_TOOLBAR
 Command15=ID_VIEW_STATUS_BAR
-Command16=ID_LINE
-Command17=ID_RECT
-Command18=ID_ELLIPSE
-Command19=ID_W1
-Command20=ID_W2
-Command21=ID_W3
-Command22=ID_W4
-Command23=ID_W5
-Command24=ID_COLOR
-Command25=ID_FILLCOLOR
-Command26=ID_APP_ABOUT
-CommandCount=26
+Command16=ID_APP_ABOUT
+Command17=ID_LINE
+Command18=ID_RETkongxin
+Command19=ID_RETshixin
+Command20=ID_EllipseKong
+Command21=ID_EllipseShi
+Command22=ID_W1
+Command23=ID_W2
+Command24=ID_W3
+Command25=ID_W4
+Command26=ID_W5
+Command27=ID_COLOR
+Command28=ID_FILLCOLOR
+Command29=ID_SIN
+CommandCount=29
 
 [ACL:IDR_MAINFRAME]
 Type=1
@@ -137,7 +143,28 @@ Class=?
 Command1=ID_LINE
 Command2=ID_RECT
 Command3=ID_ELLIPSE
-Command4=ID_COLOR
-Command5=ID_FILLCOLOR
-CommandCount=5
+Command4=ID_CURVE
+Command5=ID_SHANGXING
+Command6=ID_COLOR
+Command7=ID_FILLCOLOR
+CommandCount=7
+
+[DLG:IDD_DIALOGBAR (English (U.S.))]
+Type=1
+Class=?
+ControlCount=1
+Control1=IDC_STATIC,static,1342308352
+
+[DLG:IDD_DIALOG1]
+Type=1
+Class=CDialog1
+ControlCount=0
+
+[CLS:CDialog1]
+Type=0
+HeaderFile=Dialog1.h
+ImplementationFile=Dialog1.cpp
+BaseClass=CDialog
+Filter=D
+LastObject=CDialog1
 

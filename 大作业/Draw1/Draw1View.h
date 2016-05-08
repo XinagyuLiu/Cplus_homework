@@ -19,11 +19,13 @@ protected: // create from serialization only
 public:
 	COLORREF m_nColor;
 	COLORREF m_fColor;
+	static BOOL click_fCol;
 	CPoint cpoint;
 	CPoint opoint;
 	BOOL m_Down;
 	int w;  //线宽
-	int shape;
+    int shape; //图形种类
+	int function; //函数种类
 
 // Attributes
 public:
@@ -79,6 +81,20 @@ protected:
 	afx_msg void OnUpdateW5(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateRect(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateEllipse(CCmdUI* pCmdUI);
+	afx_msg void OnCurve();
+	afx_msg void OnUpdateCurve(CCmdUI* pCmdUI);
+	afx_msg void OnShangxing();
+	afx_msg void OnUpdateShangxing(CCmdUI* pCmdUI);
+	afx_msg void OnRETkongxin();
+	afx_msg void OnUpdateRETkongxin(CCmdUI* pCmdUI);
+	afx_msg void OnRETshixin();
+	afx_msg void OnUpdateRETshixin(CCmdUI* pCmdUI);
+	afx_msg void OnEllipseKong();
+	afx_msg void OnUpdateEllipseKong(CCmdUI* pCmdUI);
+	afx_msg void OnEllipseShi();
+	afx_msg void OnUpdateEllipseShi(CCmdUI* pCmdUI);
+	afx_msg void OnSin();
+	afx_msg void OnUpdateSin(CCmdUI* pCmdUI);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

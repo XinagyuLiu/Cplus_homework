@@ -103,6 +103,8 @@ BEGIN
     BUTTON      ID_LINE
     BUTTON      ID_RECT
     BUTTON      ID_ELLIPSE
+    BUTTON      ID_CURVE
+    BUTTON      ID_SHANGXING
     SEPARATOR
     BUTTON      ID_COLOR
     BUTTON      ID_FILLCOLOR
@@ -144,11 +146,23 @@ BEGIN
         MENUITEM "工具栏(&T)",                  ID_VIEW_TOOLBAR
         MENUITEM "状态栏(&S)",                  ID_VIEW_STATUS_BAR
     END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "关于 Draw1(&A)...",           ID_APP_ABOUT
+    END
     POPUP "绘图"
     BEGIN
         MENUITEM "直线",                        ID_LINE
-        MENUITEM "矩形",                        ID_RECT
-        MENUITEM "椭圆",                        ID_ELLIPSE
+        POPUP "矩形"
+        BEGIN
+            MENUITEM "空心",                        ID_RETkongxin
+            MENUITEM "实心",                        ID_RETshixin
+        END
+        POPUP "椭圆"
+        BEGIN
+            MENUITEM "空心",                        ID_EllipseKong
+            MENUITEM "实心",                        ID_EllipseShi
+        END
         MENUITEM SEPARATOR
         POPUP "线宽"
         BEGIN
@@ -161,9 +175,9 @@ BEGIN
         MENUITEM "颜色",                        ID_COLOR
         MENUITEM "填充色",                      ID_FILLCOLOR
     END
-    POPUP "帮助(&H)"
+    POPUP "函数"
     BEGIN
-        MENUITEM "关于 Draw1(&A)...",           ID_APP_ABOUT
+        MENUITEM "三角函数",                    ID_SIN
     END
 END
 
@@ -206,6 +220,13 @@ BEGIN
     LTEXT           "Draw1 1.0 版",IDC_STATIC,40,10,119,8,SS_NOPREFIX
     LTEXT           "版权所有 (C) 2016",IDC_STATIC,40,25,119,8
     DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_DIALOG1 DIALOG DISCARDABLE  0, 0, 187, 135
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "函数图像"
+FONT 10, "System"
+BEGIN
 END
 
 
@@ -269,6 +290,14 @@ BEGIN
         RIGHTMARGIN, 228
         TOPMARGIN, 7
         BOTTOMMARGIN, 48
+    END
+
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 128
     END
 END
 #endif    // APSTUDIO_INVOKED

@@ -6,6 +6,11 @@
 
 #include "Draw1Doc.h"
 #include "Draw1View.h"
+#include "Dialog1.h"
+
+#include <math.h>
+#define PI 3.1415926
+#define SEGMENT 500
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -42,6 +47,20 @@ BEGIN_MESSAGE_MAP(CDraw1View, CView)
 	ON_UPDATE_COMMAND_UI(ID_W5, OnUpdateW5)
 	ON_UPDATE_COMMAND_UI(ID_RECT, OnUpdateRect)
 	ON_UPDATE_COMMAND_UI(ID_ELLIPSE, OnUpdateEllipse)
+	ON_COMMAND(ID_CURVE, OnCurve)
+	ON_UPDATE_COMMAND_UI(ID_CURVE, OnUpdateCurve)
+	ON_COMMAND(ID_SHANGXING, OnShangxing)
+	ON_UPDATE_COMMAND_UI(ID_SHANGXING, OnUpdateShangxing)
+	ON_COMMAND(ID_RETkongxin, OnRETkongxin)
+	ON_UPDATE_COMMAND_UI(ID_RETkongxin, OnUpdateRETkongxin)
+	ON_COMMAND(ID_RETshixin, OnRETshixin)
+	ON_UPDATE_COMMAND_UI(ID_RETshixin, OnUpdateRETshixin)
+	ON_COMMAND(ID_EllipseKong, OnEllipseKong)
+	ON_UPDATE_COMMAND_UI(ID_EllipseKong, OnUpdateEllipseKong)
+	ON_COMMAND(ID_EllipseShi, OnEllipseShi)
+	ON_UPDATE_COMMAND_UI(ID_EllipseShi, OnUpdateEllipseShi)
+	ON_COMMAND(ID_SIN, OnSin)
+	ON_UPDATE_COMMAND_UI(ID_SIN, OnUpdateSin)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, CView::OnFilePrint)
@@ -56,7 +75,8 @@ CDraw1View::CDraw1View()
 {
 	// TODO: add construction code here
 	w = 1;
-	shape = 0;
+	shape = 1;
+	function = 0;
 }
 
 CDraw1View::~CDraw1View()
@@ -130,16 +150,38 @@ void CDraw1View::OnLine()
 	shape = 1; //选择直线，则令shape为1
 }
 
+BOOL CDraw1View::click_fCol = FALSE;
 void CDraw1View::OnPaint() 
 {
+/*  */
 	CPaintDC dc(this); // device context for painting
 	
 	CPen pen;  //定义画笔
 	CBrush brush;  //定义画刷
+	if(click_fCol == FALSE)
+	{
+		m_fColor = RGB(255,255,255); //初始化画刷为白色
+	}
 	pen.CreatePen(PS_SOLID,w,m_nColor); //创建画笔
 	brush.CreateSolidBrush(m_fColor);   //创建画刷
 	dc.SelectObject(&pen);
 	dc.SelectObject(&brush);    //获取画刷
+	//---------开始画函数图像--------------
+	   CRect rect;
+       GetClientRect(&rect);
+	   if(function == 1)
+	{
+       
+       int nWidth = rect.Width()/2;
+       int nHeight = rect.Height()/2;
+       CPoint aPoint[SEGMENT];
+       for (int i=0; i<SEGMENT; i++)
+       {
+         aPoint[i].x = (i * nWidth) / SEGMENT;
+         aPoint[i].y = (int) ((nHeight / 2) * (1 - (sin((2*PI*i)/SEGMENT))));
+       }
+       dc.Polyline(aPoint,SEGMENT);
+	}
 	if(shape==1) 
 	{
 		dc.MoveTo(opoint.x,opoint.y);
@@ -147,8 +189,17 @@ void CDraw1View::OnPaint()
 	}
 	if(shape==2)    
 		dc.Rectangle(opoint.x,opoint.y,cpoint.x,cpoint.y); //绘制矩形   
-	if(shape==3)    
+	if(shape==21)
+	{
+		dc.SelectStockObject(NULL_BRUSH);
+		dc.Rectangle(opoint.x,opoint.y,cpoint.x,cpoint.y); //绘制空心矩形;不覆盖其他图像
+	}
+	if(shape==3||shape==31)
+	{
+		if(shape==31)
+			dc.SelectStockObject(NULL_BRUSH);
 		dc.Ellipse(opoint.x,opoint.y,cpoint.x,cpoint.y);   //绘制椭圆
+	}
 	// TODO: Add your message handler code here
 	
 	// Do not call CView::OnPaint() for painting messages
@@ -158,6 +209,7 @@ void CDraw1View::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 	m_Down = TRUE;  //鼠标按下
+	//MessageBox("View Clicked!");     //用于单击窗口客户区时的测试
 	SetCapture();  //获取坐标
 	opoint = point;
 	ReleaseCapture(); //释放坐标
@@ -169,6 +221,27 @@ void CDraw1View::OnLButtonUp(UINT nFlags, CPoint point)
 	// TODO: Add your message handler code here and/or call default
 	m_Down = FALSE;
 	Invalidate(0); //刷新。没有这条语句不能画图
+/*
+使用hdc
+  //获得窗口的设备描述表
+    HDC hdc;
+    hdc = ::GetDC(m_hWnd);
+    //移动到线条的起点
+    MoveToEx(hdc, opoint.x, opoint.y, NULL);
+    //画线
+    LineTo(hdc, point.x, point.y);
+    //释放设备描述表
+    ::ReleaseDC(m_hWnd, hdc);
+*/
+
+/*
+	//使用CDC类实现
+    CDC *pDC = GetDC();
+    pDC->MoveTo(opoint);
+    pDC->LineTo(point);
+    ReleaseDC(pDC);
+*/
+
 	CView::OnLButtonUp(nFlags, point);
 }
 
@@ -177,6 +250,46 @@ void CDraw1View::OnMouseMove(UINT nFlags, CPoint point)
 	// TODO: Add your message handler code here and/or call default
 	if(m_Down)
 		cpoint = point;
+	
+if(shape ==4||shape == 5){
+	Invalidate(0);
+	CPaintDC dc(this);
+	CPen pen;  //定义画笔
+	pen.CreatePen(PS_SOLID,w,m_nColor); //创建画笔
+	dc.SelectObject(&pen);
+	if (m_Down==TRUE && shape==4)
+    {
+        dc.MoveTo(opoint);
+        dc.LineTo(point);
+        opoint = point ;  //每次都更新起点
+    }
+	else if (m_Down==TRUE && shape==5)
+	{//画扇形
+		dc.MoveTo(opoint);
+        dc.LineTo(point);
+	}
+}
+/* 
+//调试输出变量
+CString strMsg;
+strMsg.Format("Value:%d",shape);
+MessageBox( strMsg);  
+*/
+
+/* 
+    CClientDC dc(this);
+    //创建一个画笔
+    CPen pen(PS_SOLID, 1, m_fColor);
+    //将创建的画笔选入设备描述表
+    CPen *pOldPen = dc.SelectObject(&pen);
+    if (m_Down == TRUE)
+    {
+        dc.MoveTo(opoint);
+        dc.LineTo(point);
+        opoint = point ;  //每次都更新起点
+    }
+*/
+
 	CView::OnMouseMove(nFlags, point);
 }
 
@@ -191,13 +304,13 @@ void CDraw1View::OnColor()
 void CDraw1View::OnRect() 
 {
 	// TODO: Add your command handler code here
-	shape = 2; 
+	shape = 21; 
 }
 
 void CDraw1View::OnEllipse() 
 {
 	// TODO: Add your command handler code here
-	shape = 3; 
+	shape = 31; 
 }
 
 void CDraw1View::OnW1() 
@@ -232,10 +345,13 @@ void CDraw1View::OnW5()
 
 void CDraw1View::OnFillcolor() 
 {
-	// TODO: Add your command handler code here
+	// TODO: Add your command handler code here	
 	CColorDialog FillColor; 
 	if(FillColor.DoModal() == IDOK) 
+	{
+		click_fCol = TRUE;
 		m_fColor=FillColor.GetColor();
+	}
 }
 
 void CDraw1View::OnUpdateLine(CCmdUI* pCmdUI) 
@@ -277,11 +393,97 @@ void CDraw1View::OnUpdateW5(CCmdUI* pCmdUI)
 void CDraw1View::OnUpdateRect(CCmdUI* pCmdUI) 
 {
 	// TODO: Add your command update UI handler code here
-	pCmdUI->SetCheck(shape==2); 
+	pCmdUI->SetCheck(shape==2||shape==21); 
 }
 
 void CDraw1View::OnUpdateEllipse(CCmdUI* pCmdUI) 
 {
 	// TODO: Add your command update UI handler code here
+	pCmdUI->SetCheck(shape==3||shape==31); 
+}
+
+void CDraw1View::OnCurve() 
+{
+	// TODO: Add your command handler code here
+	shape = 4;
+}
+
+void CDraw1View::OnUpdateCurve(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->SetCheck(shape==4); 
+}
+
+void CDraw1View::OnShangxing() 
+{
+	// TODO: Add your command handler code here
+	shape = 5;
+}
+
+void CDraw1View::OnUpdateShangxing(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->SetCheck(shape==5); 
+}
+
+void CDraw1View::OnRETkongxin() 
+{
+	// TODO: Add your command handler code here
+	shape = 21; 
+}
+
+void CDraw1View::OnUpdateRETkongxin(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->SetCheck(shape==21); 
+}
+
+void CDraw1View::OnRETshixin() 
+{
+	// TODO: Add your command handler code here
+	shape = 2; 
+}
+
+void CDraw1View::OnUpdateRETshixin(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->SetCheck(shape==2); 
+}
+
+void CDraw1View::OnEllipseKong() 
+{
+	// TODO: Add your command handler code here
+	shape = 31; 
+}
+
+void CDraw1View::OnUpdateEllipseKong(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->SetCheck(shape==31); 
+}
+
+void CDraw1View::OnEllipseShi() 
+{
+	// TODO: Add your command handler code here
+	shape = 3; 
+}
+
+void CDraw1View::OnUpdateEllipseShi(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
 	pCmdUI->SetCheck(shape==3); 
+}
+
+void CDraw1View::OnSin() 
+{
+	// TODO: Add your command handler code here
+	function = 1;
+	CDialog1 dialog1;
+	dialog1.DoModal();
+}
+
+void CDraw1View::OnUpdateSin(CCmdUI* pCmdUI) 
+{
+	// TODO: Add your command update UI handler code here
+	pCmdUI->SetCheck(function==1); 
 }
