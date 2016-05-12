@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "Draw1.h"
+#include "Dialog1.h" //为了建立非模态对话框
 
 #include "MainFrm.h"
 #include "Draw1Doc.h"

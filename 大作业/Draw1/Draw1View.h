@@ -8,7 +8,8 @@
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-
+#include "Dialog1.h"  //为了使弹出对话框非模态
+#include "Dialog2.h"
 
 class CDraw1View : public CView
 {
@@ -26,6 +27,10 @@ public:
 	int w;  //线宽
     int shape; //图形种类
 	int function; //函数种类
+
+private:
+	CDialog1  *m_pDialog1;
+	CDialog2  *m_pDialog2;
 
 // Attributes
 public:
@@ -93,8 +98,8 @@ protected:
 	afx_msg void OnUpdateEllipseKong(CCmdUI* pCmdUI);
 	afx_msg void OnEllipseShi();
 	afx_msg void OnUpdateEllipseShi(CCmdUI* pCmdUI);
-	afx_msg void OnSin();
-	afx_msg void OnUpdateSin(CCmdUI* pCmdUI);
+	afx_msg void OnDialogSin();
+	afx_msg void OnDialogPara();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

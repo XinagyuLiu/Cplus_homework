@@ -6,16 +6,17 @@
 --------------------Configuration: Draw1 - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating temporary file "C:\Users\LXY\AppData\Local\Temp\RSP2114.tmp" with contents
+Creating temporary file "C:\Users\LXY\AppData\Local\Temp\RSP83F9.tmp" with contents
 [
 /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Release/" /Fp"Release/Draw1.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
-"D:\GitHub\C++程序设计\大作业\Draw1\Draw1View.cpp"
+"D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp"
 ]
-Creating command line "cl.exe @C:\Users\LXY\AppData\Local\Temp\RSP2114.tmp" 
-Creating temporary file "C:\Users\LXY\AppData\Local\Temp\RSP2115.tmp" with contents
+Creating command line "cl.exe @C:\Users\LXY\AppData\Local\Temp\RSP83F9.tmp" 
+Creating temporary file "C:\Users\LXY\AppData\Local\Temp\RSP840A.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:no /pdb:"Release/Draw1.pdb" /machine:I386 /out:"Release/Draw1.exe" 
 ".\Release\Dialog1.obj"
+".\Release\Dialog2.obj"
 ".\Release\Draw1.obj"
 ".\Release\Draw1Doc.obj"
 ".\Release\Draw1View.obj"
@@ -23,16 +24,46 @@ Creating temporary file "C:\Users\LXY\AppData\Local\Temp\RSP2115.tmp" with conte
 ".\Release\StdAfx.obj"
 ".\Release\Draw1.res"
 ]
-Creating command line "link.exe @C:\Users\LXY\AppData\Local\Temp\RSP2115.tmp"
+Creating command line "link.exe @C:\Users\LXY\AppData\Local\Temp\RSP840A.tmp"
 <h3>Output Window</h3>
 Compiling...
-Draw1View.cpp
+Dialog1.cpp
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(122) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(122) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(125) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(125) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(126) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(126) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(143) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(143) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(146) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(146) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(147) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(147) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(164) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(164) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(167) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(167) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(168) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(168) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(187) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(187) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(190) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(190) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(191) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(191) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(211) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(211) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(214) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(214) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(215) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:\GitHub\C++程序设计\大作业\Draw1\Dialog1.cpp(215) : warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
 Linking...
 
 
 
 <h3>Results</h3>
-Draw1.exe - 0 error(s), 0 warning(s)
+Draw1.exe - 0 error(s), 30 warning(s)
 </pre>
 </body>
 </html>

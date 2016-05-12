@@ -8,20 +8,22 @@ NewFileInclude1=#include "stdafx.h"
 NewFileInclude2=#include "Draw1.h"
 LastPage=0
 
-ClassCount=6
+ClassCount=7
 Class1=CDraw1App
 Class2=CDraw1Doc
 Class3=CDraw1View
 Class4=CMainFrame
 
-ResourceCount=5
+ResourceCount=6
 Resource1=IDR_MAINFRAME
 Resource2=IDR_DRAW
 Class5=CAboutDlg
-Resource3=IDD_ABOUTBOX
+Resource3=IDD_DIALOG_SIN
 Resource4=IDD_DIALOGBAR (English (U.S.))
 Class6=CDialog1
-Resource5=IDD_DIALOG1
+Resource5=IDD_ABOUTBOX
+Class7=CDialog2
+Resource6=IDD_DIALOG_PARA
 
 [CLS:CDraw1App]
 Type=0
@@ -102,8 +104,9 @@ Command25=ID_W4
 Command26=ID_W5
 Command27=ID_COLOR
 Command28=ID_FILLCOLOR
-Command29=ID_SIN
-CommandCount=29
+Command29=IDD_DIALOG_SIN
+Command30=IDD_DIALOG_PARA
+CommandCount=30
 
 [ACL:IDR_MAINFRAME]
 Type=1
@@ -155,16 +158,62 @@ Class=?
 ControlCount=1
 Control1=IDC_STATIC,static,1342308352
 
-[DLG:IDD_DIALOG1]
-Type=1
-Class=CDialog1
-ControlCount=0
-
 [CLS:CDialog1]
 Type=0
 HeaderFile=Dialog1.h
 ImplementationFile=Dialog1.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=CDialog1
+LastObject=IDC_EDIT_b
+VirtualFilter=dWC
+
+[DLG:IDD_DIALOG_SIN]
+Type=1
+Class=CDialog1
+ControlCount=17
+Control1=IDC_PICTURE01,static,1342177287
+Control2=IDC_EDIT1,edit,1350631552
+Control3=IDC_EDIT2,edit,1350631552
+Control4=IDC_STATIC_A,static,1342308352
+Control5=IDC_EDIT3,edit,1350631552
+Control6=IDC_STATIC_FAI,static,1342308352
+Control7=IDC_DRAW_AGAIN,button,1342242816
+Control8=IDC_STATIC,static,1342308352
+Control9=IDC_STATIC,static,1342308353
+Control10=IDC_STATIC,static,1342308353
+Control11=IDC_EDIT_a,edit,1350631552
+Control12=IDC_EDIT_b,edit,1350631552
+Control13=IDC_DRAW_YICI,button,1342242816
+Control14=IDC_STATIC,static,1342308352
+Control15=IDC_DRAW_AGAIN_COS,button,1342242816
+Control16=IDC_DRAW_AGAIN_TAN,button,1342242816
+Control17=IDC_DRAW_AGAIN_COT,button,1342242816
+
+[DLG:IDD_DIALOG_PARA]
+Type=1
+Class=CDialog2
+ControlCount=14
+Control1=IDC_PICTURE02,static,1342177287
+Control2=IDC_STATIC,static,1342308353
+Control3=IDC_STATIC,static,1342308352
+Control4=IDC_EDIT_P1,edit,1350631552
+Control5=IDC_STATIC,static,1342308353
+Control6=IDC_STATIC,static,1342308352
+Control7=IDC_EDIT_P2,edit,1350631552
+Control8=IDC_STATIC,static,1342308353
+Control9=IDC_STATIC,static,1342308352
+Control10=IDC_EDIT_P3,edit,1350631552
+Control11=IDC_STATIC,static,1342308353
+Control12=IDC_STATIC,static,1342308352
+Control13=IDC_EDIT_P4,edit,1350631552
+Control14=IDC_DRAW_AGAIN2,button,1342242816
+
+[CLS:CDialog2]
+Type=0
+HeaderFile=Dialog2.h
+ImplementationFile=Dialog2.cpp
+BaseClass=CDialog
+Filter=D
+VirtualFilter=dWC
+LastObject=CDialog2
 

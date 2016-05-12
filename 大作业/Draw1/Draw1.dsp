@@ -94,6 +94,10 @@ SOURCE=.\Dialog1.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Dialog2.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\Draw1.cpp
 # End Source File
 # Begin Source File
@@ -124,6 +128,10 @@ SOURCE=.\StdAfx.cpp
 # Begin Source File
 
 SOURCE=.\Dialog1.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Dialog2.h
 # End Source File
 # Begin Source File
 

@@ -6,7 +6,8 @@
 
 #include "Draw1Doc.h"
 #include "Draw1View.h"
-#include "Dialog1.h"
+#include "Dialog1.h"  //为了使弹出对话框非模态
+#include "Dialog2.h" 
 
 #include <math.h>
 #define PI 3.1415926
@@ -59,8 +60,8 @@ BEGIN_MESSAGE_MAP(CDraw1View, CView)
 	ON_UPDATE_COMMAND_UI(ID_EllipseKong, OnUpdateEllipseKong)
 	ON_COMMAND(ID_EllipseShi, OnEllipseShi)
 	ON_UPDATE_COMMAND_UI(ID_EllipseShi, OnUpdateEllipseShi)
-	ON_COMMAND(ID_SIN, OnSin)
-	ON_UPDATE_COMMAND_UI(ID_SIN, OnUpdateSin)
+	ON_COMMAND(IDD_DIALOG_SIN, OnDialogSin)
+	ON_COMMAND(IDD_DIALOG_PARA, OnDialogPara)
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, CView::OnFilePrint)
@@ -77,10 +78,16 @@ CDraw1View::CDraw1View()
 	w = 1;
 	shape = 1;
 	function = 0;
+	m_pDialog1 = NULL; //初始化指针
 }
 
 CDraw1View::~CDraw1View()
 {
+	if (m_pDialog1 != NULL)   
+    {   
+        // 删除非模态对话框对象   
+        delete m_pDialog1;   
+    } 
 }
 
 BOOL CDraw1View::PreCreateWindow(CREATESTRUCT& cs)
@@ -169,7 +176,7 @@ void CDraw1View::OnPaint()
 	//---------开始画函数图像--------------
 	   CRect rect;
        GetClientRect(&rect);
-	   if(function == 1)
+/*	   if(function == 1)
 	{
        
        int nWidth = rect.Width()/2;
@@ -181,7 +188,7 @@ void CDraw1View::OnPaint()
          aPoint[i].y = (int) ((nHeight / 2) * (1 - (sin((2*PI*i)/SEGMENT))));
        }
        dc.Polyline(aPoint,SEGMENT);
-	}
+	}*/
 	if(shape==1) 
 	{
 		dc.MoveTo(opoint.x,opoint.y);
@@ -209,7 +216,6 @@ void CDraw1View::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: Add your message handler code here and/or call default
 	m_Down = TRUE;  //鼠标按下
-	//MessageBox("View Clicked!");     //用于单击窗口客户区时的测试
 	SetCapture();  //获取坐标
 	opoint = point;
 	ReleaseCapture(); //释放坐标
@@ -221,26 +227,6 @@ void CDraw1View::OnLButtonUp(UINT nFlags, CPoint point)
 	// TODO: Add your message handler code here and/or call default
 	m_Down = FALSE;
 	Invalidate(0); //刷新。没有这条语句不能画图
-/*
-使用hdc
-  //获得窗口的设备描述表
-    HDC hdc;
-    hdc = ::GetDC(m_hWnd);
-    //移动到线条的起点
-    MoveToEx(hdc, opoint.x, opoint.y, NULL);
-    //画线
-    LineTo(hdc, point.x, point.y);
-    //释放设备描述表
-    ::ReleaseDC(m_hWnd, hdc);
-*/
-
-/*
-	//使用CDC类实现
-    CDC *pDC = GetDC();
-    pDC->MoveTo(opoint);
-    pDC->LineTo(point);
-    ReleaseDC(pDC);
-*/
 
 	CView::OnLButtonUp(nFlags, point);
 }
@@ -269,26 +255,7 @@ if(shape ==4||shape == 5){
         dc.LineTo(point);
 	}
 }
-/* 
-//调试输出变量
-CString strMsg;
-strMsg.Format("Value:%d",shape);
-MessageBox( strMsg);  
-*/
 
-/* 
-    CClientDC dc(this);
-    //创建一个画笔
-    CPen pen(PS_SOLID, 1, m_fColor);
-    //将创建的画笔选入设备描述表
-    CPen *pOldPen = dc.SelectObject(&pen);
-    if (m_Down == TRUE)
-    {
-        dc.MoveTo(opoint);
-        dc.LineTo(point);
-        opoint = point ;  //每次都更新起点
-    }
-*/
 
 	CView::OnMouseMove(nFlags, point);
 }
@@ -474,16 +441,33 @@ void CDraw1View::OnUpdateEllipseShi(CCmdUI* pCmdUI)
 	pCmdUI->SetCheck(shape==3); 
 }
 
-void CDraw1View::OnSin() 
+
+void CDraw1View::OnDialogSin() 
 {
 	// TODO: Add your command handler code here
-	function = 1;
-	CDialog1 dialog1;
-	dialog1.DoModal();
+	//CDialog1 dialog1;  //模态对话框
+	//dialog1.DoModal();
+	if (m_pDialog1 == NULL)   
+    {   
+        // 创建非模态对话框实例   
+        m_pDialog1 = new CDialog1();   
+        m_pDialog1->Create(IDD_DIALOG_SIN, this);   
+    }   
+    // 显示非模态对话框   
+    m_pDialog1->ShowWindow(SW_SHOW);   
 }
 
-void CDraw1View::OnUpdateSin(CCmdUI* pCmdUI) 
+void CDraw1View::OnDialogPara() 
 {
-	// TODO: Add your command update UI handler code here
-	pCmdUI->SetCheck(function==1); 
+	// TODO: Add your command handler code here
+	//CDialog2 dialog2;  //模态对话框
+	//dialog2.DoModal();
+	if (m_pDialog2 == NULL)   
+    {   
+        // 创建非模态对话框实例   
+        m_pDialog2 = new CDialog2();   
+        m_pDialog2->Create(IDD_DIALOG_PARA, this);   
+    }   
+    // 显示非模态对话框   
+    m_pDialog2->ShowWindow(SW_SHOW);   
 }
