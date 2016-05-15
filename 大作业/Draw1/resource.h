@@ -28,6 +28,14 @@
 #define IDC_EDIT_a                      1015
 #define IDC_EDIT_b                      1016
 #define IDC_DRAW_YICI                   1017
+#define IDC_EDIT_ZHISHU_a               1018
+#define IDC_DRAW_ZHISHU                 1019
+#define IDC_SAVE_ALL_NODES              1020
+#define IDC_CLEAR_ALL_NODES             1021
+#define IDC_NOTES                       1022
+#define IDC_HANSHU_TISHI                1023
+#define IDC_OPEN                        1024
+#define IDC_OPEN2                       1025
 #define ID_LINE                         32771
 #define ID_RECT                         32772
 #define ID_ELLIPSE                      32773
@@ -52,7 +60,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        134
 #define _APS_NEXT_COMMAND_VALUE         32805
-#define _APS_NEXT_CONTROL_VALUE         1019
+#define _APS_NEXT_CONTROL_VALUE         1025
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

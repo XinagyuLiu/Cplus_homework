@@ -1,0 +1,26 @@
+作业：为前面作业中的字符串类MyString增加如下功能：
+1）把等号“=”运算符重载为MyString的成员函数，实现通过“=”运算符给字符串赋值。
+比如：MyString str1 = "abc"; 
+	MyString str2;
+	str2 = str1;
+	str1 = "xyz";
+	str2 = str1 = "xyz"; 
+	
+2) 把等号“+”运算符重载为MyString的成员函数，实现通过“+”运算符把两个字符串连接起来。
+比如：MyString str1 = "abc"; 
+	MyString str2 = "def";
+	MyString str3 = str1 + str2; //str3 = "abcdef" 注意，该操作不要改变str1的值。
+	
+3) 把“+=”运算符重载为MyString类的友元函数，实现通过“+=”运算符对字符串进行追加。
+比如：MyString str1 = "abc"; 
+	MyString str2 = "def";
+	str1 += str2;  //str1 = "abcdef"
+	str1 += "ghi";  // str1 = "abcdefghi"
+	
+4) 给所有构造函数、拷贝构造函数、析构函数、以及运算符重载函数加上打印语句。
+观察各个函数的调用是否符合你个人的设想。
+
+
+5)在main函数里编写测试用例，对MyString类的各个函数进行测试。
+	
+	

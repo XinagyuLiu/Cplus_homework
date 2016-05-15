@@ -1,0 +1,30 @@
+作业1: 在第8课的作业中增加动态约束特性。具体要求如下：
+（1）在Shape类里增加一个纯虚函数float area()。
+
+（2）在Shape类增加一个虚函数whoami(),打印“This is a shape.”. 在子类中重写这个函数，在Triangle类的whoami中打印“This is a triangle."，在Rectangle类中打印“This is a rectangle."。
+
+（3）补充完整如下的main函数。
+void main() {
+	//Triangle的三个参数分别是位置x，y坐标和三角形的边长。假设是等边三角形，根据边长计算面积。
+	//Rectangle的四个参数分别是位置x，y坐标和矩形的长和宽。根据长和宽计算面积。
+	//&Triangle(10, 10, 8)表示构造一个Triangle对象，并对它取地址。
+	Shape * shapes[3] = { &Triangle(10, 10, 8),  &Rectangle(15, 20, 6, 10),
+		  &Triangle(20, 20, 10)};
+	
+	/*
+	 * 在这里添加你的代码，完成如下功能：
+	 * 1: 显示shapes里每个图形的位置
+	 * 2：调用whoami函数打印每个图形的类型。
+	 * 3：计算出所有图形的面积总和。
+	 */
+}
+
+作业2:  把第3次作业——使用链表实现的整数堆栈类扩展为用类模板实现，从而使该堆栈类可以支持任意数据类型。
+
+
+
+
+
+
+
+

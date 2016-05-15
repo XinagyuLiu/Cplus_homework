@@ -1,0 +1,115 @@
+附加题：该题目选做。不做不扣分，如果完成此题，则适当加分。
+    自定义的整数数组类MyArray有一个内部迭代器类iterator，可以通过该迭代器访问MyArray里的一个元素。
+类的声明已经给出，请补充完整类的实现部分。
+    要求：main函数可以正常工作，输出数组中的数据。
+
+//MyArray类的声明部分
+class MyArray {
+public:
+	//定义内部类
+	class iterator {
+	friend class MyArray;
+	private: 
+		int * pointer;    //这个指针用于指向MyArray数组的某个元素
+	public: 
+		//构造函数
+		iterator() ;
+		iterator(iterator &it);
+
+		//重载赋值运算符（=）
+		iterator&  operator= (iterator &it);
+
+		//重载比较运算符，比较两个iterator是否指向数组的同一个元素
+		bool  operator == (iterator &it) ;
+		bool  operator!= (iterator &it) ;
+
+		//重载后置++运算符，iterator指向数组的下一个元素，返回值iterator当前指向的数组元素
+		iterator operator++(int);
+
+		//重载指针操作运算符(*)。这样，可以把iterator当做指针一样通过*iterator获得指向的数组元素。
+		int operator*() ;
+	};
+
+public:
+	MyArray(unsigned int capacity = 10);  //构造函数
+	~MyArray();                                                 //析构函数
+
+	int size() {return _size; };                   //返回数组的元素个数
+	int capacity() {return _capacity;};  //返回数组的容量
+
+	iterator begin(); //返回数组的开始位置
+	iterator end();    //返回数组的结束位置
+
+	bool put( int x) ;  //放入一个整数到数组中。如果数组满，则返回false，否则 返回true。
+	
+private:
+	int* _array;              //数组指针
+	int    _capacity;       //数组最大容量
+	int    _size;               //数组内存储的元素个数
+};
+
+
+//////////////////MyArray类的实现/////////////////////
+
+MyArray::iterator::iterator() { 
+	pointer = NULL;
+};
+	
+MyArray::iterator::iterator(iterator &it) { 
+	pointer = it.pointer;
+};
+MyArray::iterator&  MyArray::iterator::operator= (iterator &it) {
+	pointer =  it.pointer; 
+	return *this;
+};
+
+bool  MyArray::iterator::operator== (iterator &it) {
+	return (pointer == it.pointer);
+};
+
+bool  MyArray::iterator::operator!= (iterator &it) {
+	return (pointer != it.pointer);
+};
+
+MyArray::iterator MyArray::iterator::operator++(int) {
+	/*请完成该函数*/
+};
+int MyArray::iterator::operator*() {
+	/*请完成该函数*/
+}; 
+
+MyArray::MyArray(unsigned int capacity) {
+	_array = new int[capacity];
+	_capacity = capacity;
+	_size = 0;
+}
+MyArray::~MyArray() {
+	delete []_array;
+}
+
+bool MyArray::put(int x) {
+	if(_size >= _capacity) return false;
+	_array[_size++] = x;
+	return true;
+}
+MyArray::iterator  MyArray::begin() {
+	/*请完成该函数*/
+}
+
+MyArray::iterator   MyArray:: end() {
+	/*请完成该函数*/
+}
+
+
+void main() {
+	MyArray myarray(10);
+	for (int i = 0; i < 10; i++) {
+		myarray.put(i);
+	}
+	
+	//输出myarray里的数据
+	MyArray::iterator it;
+	for (it = myarray.begin(); it != myarray.end(); it++){
+		cout << *it << endl;
+	}
+}

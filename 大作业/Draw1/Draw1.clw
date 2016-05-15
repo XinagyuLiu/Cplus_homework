@@ -67,11 +67,12 @@ Filter=D
 [DLG:IDD_ABOUTBOX]
 Type=1
 Class=CAboutDlg
-ControlCount=4
+ControlCount=5
 Control1=IDC_STATIC,static,1342177283
 Control2=IDC_STATIC,static,1342308480
 Control3=IDC_STATIC,static,1342308352
 Control4=IDOK,button,1342373889
+Control5=IDC_STATIC,static,1342308352
 
 [MNU:IDR_MAINFRAME]
 Type=1
@@ -164,13 +165,13 @@ HeaderFile=Dialog1.h
 ImplementationFile=Dialog1.cpp
 BaseClass=CDialog
 Filter=D
-LastObject=IDC_EDIT_b
+LastObject=IDC_EDIT_ZHISHU_a
 VirtualFilter=dWC
 
 [DLG:IDD_DIALOG_SIN]
 Type=1
 Class=CDialog1
-ControlCount=17
+ControlCount=27
 Control1=IDC_PICTURE01,static,1342177287
 Control2=IDC_EDIT1,edit,1350631552
 Control3=IDC_EDIT2,edit,1350631552
@@ -188,6 +189,16 @@ Control14=IDC_STATIC,static,1342308352
 Control15=IDC_DRAW_AGAIN_COS,button,1342242816
 Control16=IDC_DRAW_AGAIN_TAN,button,1342242816
 Control17=IDC_DRAW_AGAIN_COT,button,1342242816
+Control18=IDC_STATIC,static,1342308352
+Control19=IDC_STATIC,static,1342308353
+Control20=IDC_EDIT_ZHISHU_a,edit,1350631552
+Control21=IDC_DRAW_ZHISHU,button,1342242816
+Control22=IDC_NOTES,static,1342308353
+Control23=IDC_SAVE_ALL_NODES,button,1342242816
+Control24=IDC_CLEAR_ALL_NODES,button,1342242816
+Control25=IDC_HANSHU_TISHI,static,1342308353
+Control26=IDC_OPEN,button,1342242816
+Control27=IDC_OPEN2,button,1342242816
 
 [DLG:IDD_DIALOG_PARA]
 Type=1

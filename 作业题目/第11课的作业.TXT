@@ -1,0 +1,18 @@
+作业：把第3次作业——整数链表栈类使用STL的list模板加以实现，并增加一个find函数，用来查找栈内里面是否包含指定数据。
+class MyStack {
+private:
+	/*
+	 * 在下面用STL的list定义一个整数list对象，用来存储stack的数据。
+	 */
+
+public:
+	/*
+	 * 在下面定义Stack类的各个方法。
+	 * find, push, pop, size, top, isEmpty等。
+	 */
+	 bool find(int target); //如果list里面包含num，返回true，否则返回false。
+	 
+	 //其他方法的声明
+};
+
+

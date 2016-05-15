@@ -20,17 +20,43 @@ double cot(double number)
 {  //自定义余切函数
 	return 1.0/tan(number);
 }
+struct Node
+{
+	double f[4],a[4],fai[4];
+	int func; //1,2,3,4
+	//分别对应sin,cos,tan,cot
+	//func为0时，表示所有函数的参数为0
+};
+Node ForSave[10]//;={0}
 
-int function=-1;
+void CDialog1::Save()
+{
+	FILE *fp;     
+    fp=fopen("my.dat","wb");
+    //fwrite(&ForSave,sizeof(ForSave),1,fp);     // 写1个结构
+    for (int i=0;i<10;i++) fwrite(&ForSave[i],sizeof(ForSave),1,fp);    //  写10个结构
+    fclose(fp);
+}
+void CDialog1::Open()
+{
+	FILE *fp;     
+    fp=fopen("my.dat","rb");
+    //fread(&ForSave,sizeof(ForSave),1,fp);     // 读1个结构
+    for (int i=0;i<10;i++) fread(&ForSave[i],sizeof(ForSave),1,fp);    //  读 10个结构
+    fclose(fp);
+}
+
+int function=0;
 CDialog1::CDialog1(CWnd* pParent /*=NULL*/)
 	: CDialog(CDialog1::IDD, pParent)
 {
 	//{{AFX_DATA_INIT(CDialog1)
-	m_f = 0.5;
-	m_a = 1.0;
-	m_fai = 1.0;
-	m_yici_a = 0.5;
-	m_yici_b = 3.0;
+	m_f = 0.0;
+	m_a = 0.0;
+	m_fai = 0.0;
+	m_yici_a = 0.0;
+	m_yici_b = 0.0;
+	m_zhishu_a = 0.0;
 	//}}AFX_DATA_INIT
 }
 
@@ -44,6 +70,7 @@ void CDialog1::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT3, m_fai);
 	DDX_Text(pDX, IDC_EDIT_a, m_yici_a);
 	DDX_Text(pDX, IDC_EDIT_b, m_yici_b);
+	DDX_Text(pDX, IDC_EDIT_ZHISHU_a, m_zhishu_a);
 	//}}AFX_DATA_MAP
 }
 
@@ -58,6 +85,11 @@ BEGIN_MESSAGE_MAP(CDialog1, CDialog)
 	ON_BN_CLICKED(IDC_DRAW_AGAIN_COS, OnDrawAgainCos)
 	ON_BN_CLICKED(IDC_DRAW_AGAIN_TAN, OnDrawAgainTan)
 	ON_BN_CLICKED(IDC_DRAW_AGAIN_COT, OnDrawAgainCot)
+	ON_BN_CLICKED(IDC_DRAW_ZHISHU, OnDrawZhishu)
+	ON_BN_CLICKED(IDC_SAVE_ALL_NODES, OnSaveAllNodes)
+	ON_BN_CLICKED(IDC_CLEAR_ALL_NODES, OnClearAllNodes)
+	ON_BN_CLICKED(IDC_OPEN, OnOpen)
+	ON_BN_CLICKED(IDC_OPEN2, OnOpen2)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -107,7 +139,7 @@ void CDialog1::OnPicture01()
 
 
 //------------------------------------
-    if(function==0){
+    if(function==-1){
     	//一次函数
     	double x=0,y=0;  
     	BOOL IsFirstNode = TRUE; 
@@ -115,6 +147,26 @@ void CDialog1::OnPicture01()
     	{
     		x = p; 
     		y = m_yici_a*p + m_yici_b;
+    		if(x>=-18 && x<=18 && y>=-10 && y<=10)
+    		{
+            	if(IsFirstNode)  //判断是否为第一个点
+            	{
+            		dc.MoveTo(50*x,50*y);   
+            		IsFirstNode = FALSE;
+            	}
+    			dc.LineTo(50*x,50*y);   
+    			dc.MoveTo(50*x,50*y);        
+    		} 
+    	} 	
+    }
+    if(function==5){
+    	//指数函数
+    	double x=0,y=0;  
+    	BOOL IsFirstNode = TRUE; 
+    	for(double p=-25*3.14;p<=25*3.14;p+=0.01)    //计算点的同时画线  
+    	{
+    		x = p; 
+    		y = pow(m_zhishu_a,x);
     		if(x>=-18 && x<=18 && y>=-10 && y<=10)
     		{
             	if(IsFirstNode)  //判断是否为第一个点
@@ -227,7 +279,7 @@ void CDialog1::OnPaint()
 	// TODO: Add your message handler code here
 	
 	// Do not call CDialog::OnPaint() for painting messages
-	MoveWindow(320,120,775,410);
+	MoveWindow(320,120,775,550);
 	OnPicture01();
 
 }
@@ -278,7 +330,7 @@ void CDialog1::OnDrawYici()
 {
 	// TODO: Add your control notification handler code here
 	UpdateData(TRUE);   
-	function = 0;
+	function = -1;
 	OnPicture01();
 	Invalidate(0);
     UpdateData(FALSE);  	
@@ -312,4 +364,113 @@ void CDialog1::OnDrawAgainCot()
 	OnPicture01();
 	Invalidate(0);
     UpdateData(FALSE); 		
+}
+
+void CDialog1::OnDrawZhishu() 
+{
+	// TODO: Add your control notification handler code here
+	UpdateData(TRUE);   
+	function = 5;
+	OnPicture01();
+	Invalidate(0);
+    UpdateData(FALSE); 		
+}
+
+int s = 1,k;
+void CDialog1::OnSaveAllNodes() 
+{
+	// TODO: Add your control notification handler code here
+	k = s-1;
+	CString str;
+	s++;
+    GetDlgItem(IDC_NOTES)->GetWindowText(str);
+	str.Format("点击保存后，保存为第%d个函数",s);
+    GetDlgItem(IDC_NOTES)->SetWindowText(str);	
+	UpdateData(TRUE);	//这不能少，很关键，不容易察觉错误
+	if(function==1)
+	{   //保存sin(x)参数
+	 	ForSave[k].f[0] = m_f;
+		ForSave[k].a[0] = m_a;
+		ForSave[k].fai[0] = m_fai;
+		ForSave[k].func = 1;
+	}
+	if(function==2)
+	{   //保存cos(x)参数
+	 	ForSave[k].f[0] = m_f;
+		ForSave[k].a[0] = m_a;
+		ForSave[k].fai[0] = m_fai;
+		ForSave[k].func = 2;
+	}
+	if(function==3)
+	{   //保存tan(x)参数
+	 	ForSave[k].f[0] = m_f;
+		ForSave[k].a[0] = m_a;
+		ForSave[k].fai[0] = m_fai;
+		ForSave[k].func = 3;
+	}
+	if(function==4)
+	{   //保存cot(x)参数
+	 	ForSave[k].f[0] = m_f;
+		ForSave[k].a[0] = m_a;
+		ForSave[k].fai[0] = m_fai;
+		ForSave[k].func = 4;
+	}
+	Save();	
+}
+
+void CDialog1::OnClearAllNodes() 
+{
+	// TODO: Add your control notification handler code here
+	for(int i=0;i<10;i++)
+		for(int j=0;j<4;j++)
+		{
+			ForSave[k].f[0] = 0;
+			ForSave[k].a[0] = 0;
+			ForSave[k].fai[0] = 0;
+			ForSave[i].func=0; 
+		}
+	m_f = 0;
+	m_a = 0;
+	m_fai = 0;
+	UpdateData(FALSE);
+	Save(); //不写它，没起到作用
+	s = 1;
+	GetDlgItem(IDC_NOTES)->SetWindowText("点击保存后，保存为第1个函数");
+	GetDlgItem(IDC_HANSHU_TISHI)->SetWindowText("*****");	
+}
+
+void CDialog1::OnOpen() 
+{
+	// TODO: Add your control notification handler code here
+	Open();
+ 	m_f = ForSave[0].f[0];
+	m_a = ForSave[0].a[0];
+	m_fai = ForSave[0].fai[0];
+    UpdateData(FALSE);	
+	if(ForSave[0].func == 1)
+		GetDlgItem(IDC_HANSHU_TISHI)->SetWindowText("现在打开的函数类型为：y=sin(x)");
+	if(ForSave[0].func == 2)
+		GetDlgItem(IDC_HANSHU_TISHI)->SetWindowText("现在打开的函数类型为：y=cos(x)");
+	if(ForSave[0].func == 3)
+		GetDlgItem(IDC_HANSHU_TISHI)->SetWindowText("现在打开的函数类型为：y=tan(x)");
+	if(ForSave[0].func == 4)
+		GetDlgItem(IDC_HANSHU_TISHI)->SetWindowText("现在打开的函数类型为：y=cot(x)");/**/
+}
+
+void CDialog1::OnOpen2() 
+{
+	// TODO: Add your control notification handler code here
+	Open();
+ 	m_f = ForSave[1].f[0];
+	m_a = ForSave[1].a[0];
+	m_fai = ForSave[1].fai[0];
+    UpdateData(FALSE);		
+	if(ForSave[1].func == 1)
+		GetDlgItem(IDC_HANSHU_TISHI)->SetWindowText("现在打开的函数类型为：y=sin(x)");
+	if(ForSave[1].func == 2)
+		GetDlgItem(IDC_HANSHU_TISHI)->SetWindowText("现在打开的函数类型为：y=cos(x)");
+	if(ForSave[1].func == 3)
+		GetDlgItem(IDC_HANSHU_TISHI)->SetWindowText("现在打开的函数类型为：y=tan(x)");
+	if(ForSave[1].func == 4)
+		GetDlgItem(IDC_HANSHU_TISHI)->SetWindowText("现在打开的函数类型为：y=cot(x)");	
 }
